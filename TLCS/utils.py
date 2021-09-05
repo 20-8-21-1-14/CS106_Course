@@ -100,7 +100,7 @@ def set_test_path(models_path_name, model_n):
     Returns a model path that identifies the model number provided as argument and a newly created 'test' path
     """
     model_folder_path = os.path.join(os.getcwd(), models_path_name, 'model_'+str(model_n), '')
-
+    print(model_folder_path)
     if os.path.isdir(model_folder_path):    
         plot_path = os.path.join(model_folder_path, 'test', '')
         os.makedirs(os.path.dirname(plot_path), exist_ok=True)

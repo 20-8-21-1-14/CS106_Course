@@ -16,11 +16,12 @@ PHASE_EWL_YELLOW = 7
 
 
 class Simulation:
-    def __init__(self, Model, Memory, TrafficGen, sumo_cmd, gamma, max_steps, green_duration, yellow_duration, num_states, num_actions, training_epochs):
+    def __init__(self, Model, Memory, TrafficGen, sumo_cmd, gamma, max_steps, green_duration, yellow_duration, num_states, num_actions, training_epochs, learning_rate):
         self._Model = Model
         self._Memory = Memory
         self._TrafficGen = TrafficGen
         self._gamma = gamma
+        self._learning_rate = learning_rate
         self._step = 0
         self._sumo_cmd = sumo_cmd
         self._max_steps = max_steps
@@ -276,7 +277,9 @@ class Simulation:
                 current_q[action] = reward + self._gamma * np.amax(q_s_a_d[i])  # update Q(state, action)
                 x[i] = state
                 y[i] = current_q  # Q(state) that includes the updated action value
-
+                
+                #Another way to update Q-value
+                #y[i] = current_q + self._learning_rate*(current_q[action]-current_q)
             self._Model.train_batch(x, y)  # train the NN
 
 

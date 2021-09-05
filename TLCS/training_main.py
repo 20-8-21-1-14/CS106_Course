@@ -54,7 +54,8 @@ if __name__ == "__main__":
         config['yellow_duration'],
         config['num_states'],
         config['num_actions'],
-        config['training_epochs']
+        config['training_epochs'],
+        config['learning_rate']
     )
     
     episode = 0
